@@ -7,13 +7,13 @@ import Signin from "./Pages/Signin"
 import Contact from "./Pages/Contact"
 import Profilepage from "./Pages/Profilepage"
 import Createpost from "./Pages/Createpost"
-import Navbar from "./Components/Navbar"
+import Header from "./Components/Header"
 
 
 export default function App() {
   return (
     <BrowserRouter>
-    <Navbar/>
+    <Header/>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/Login" element={<Login/> }/>
