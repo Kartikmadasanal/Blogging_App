@@ -1,7 +1,8 @@
 import React from 'react'
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import {AiOutlineSearch} from "react-icons/ai"
-import {FaMoon} from "react-icons/fa"
+import {FaMoon,FaSun} from "react-icons/fa"
+
 import { Link , useLocation} from 'react-router-dom';
 import logo from "./FeatherPen.png"
 import imgs from "../Components/imgg.jpg"
@@ -16,7 +17,7 @@ function Header() {
 
 
   return (
-    <Navbar className='border-b-2  '>
+    <Navbar className='border-b-2 '>
 
     <Link
       to='/'
@@ -42,8 +43,8 @@ function Header() {
         color='gray'
         pill
         onClick={()=> dispatch(toggleTheme())}
-      ><FaMoon />
-        {/* {theme === 'light' ? <FaSun /> : <FaMoon />} */}
+      >
+        {theme === 'light' ? <FaSun /> : <FaMoon />}
       </Button>
       
       <div className="flex md:order-2">
@@ -66,6 +67,7 @@ function Header() {
           </Link>
           <Dropdown.Item>Write</Dropdown.Item>
           <Dropdown.Item>My blogs</Dropdown.Item>
+          <Dropdown.Item className=' sm:hidden' onClick={()=> dispatch(toggleTheme())}>Change theme to {theme==='light'? "dark":"light"}</Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
@@ -87,6 +89,11 @@ function Header() {
   )
 }
 
+// #bg-[#1D2125] 
+// #bg-[#1D2125] 
+// #bg-[#1D2125] 
+// #bg-[#1D2125] 
+// #bg-[#1D2125] 
 export default Header
 
 
