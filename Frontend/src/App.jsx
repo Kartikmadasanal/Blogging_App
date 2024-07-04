@@ -8,6 +8,7 @@ import Contact from "./Pages/Contact"
 import Profilepage from "./Pages/Profilepage"
 import Createpost from "./Pages/Createpost"
 import Header from "./Components/Header"
+import FooterBar from "./Components/Footer"
 
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/profilepage" element={<Profilepage/> }/>
         <Route path="/createpost" element={<Createpost/> }/>
       </Routes>
+      <FooterBar/>
     </BrowserRouter>
   )
 }

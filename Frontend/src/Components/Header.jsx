@@ -2,18 +2,28 @@ import React from 'react'
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import {AiOutlineSearch} from "react-icons/ai"
 import {FaMoon} from "react-icons/fa"
-import { Link } from 'react-router-dom';
+import { Link , useLocation} from 'react-router-dom';
 import logo from "./FeatherPen.png"
+import imgs from "../Components/imgg.jpg"
+import {useSelector , useDispatch} from 'react-redux'
+import { toggleTheme } from '../redux/theme/themeSclice';
+
+
 function Header() {
+  const path = useLocation().pathname;
+  const { theme } = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
+
+
   return (
-    <Navbar className='border-b-2'>
+    <Navbar className='border-b-2  '>
 
     <Link
       to='/'
-      className='self-center flex whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
+      className='self-center flex  whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
     >
       <img className=' size-7' src={logo}/>
-      <span className='py-1  rounded-lg text-red'>
+      <span className='py-1  rounded-lg text-red font-sans '>
         CampusConnect
       </span>
     </Link>
@@ -31,7 +41,7 @@ function Header() {
         className='w-12 h-10 hidden sm:inline'
         color='gray'
         pill
-        
+        onClick={()=> dispatch(toggleTheme())}
       ><FaMoon />
         {/* {theme === 'light' ? <FaSun /> : <FaMoon />} */}
       </Button>
@@ -41,16 +51,19 @@ function Header() {
           arrowIcon={false}
           inline
           label={
-            <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+            <Avatar alt="User settings" img={imgs} rounded />
           }
         >
           <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+            <span className="block text-sm">Kartik madasanal</span>
+            <span className="block truncate text-sm font-medium">kartikmadasanal@gmail.com</span>
           </Dropdown.Header>
-          <Dropdown.Item>Home</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
+          <Link to={"/profilepage"}>
+
+          <Dropdown.Item >Profile</Dropdown.Item>
+          </Link>
+          <Dropdown.Item>Write</Dropdown.Item>
+          <Dropdown.Item>My blogs</Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
@@ -58,13 +71,13 @@ function Header() {
       </div>
     </div>
     <Navbar.Collapse>
-      <Navbar.Link >
+      <Navbar.Link active={path==="/"}  as={'div'}>
         <Link to='/'>Home</Link>
       </Navbar.Link>
-      <Navbar.Link >
+      <Navbar.Link active={path==="/aboutus"} as={'div'}>
         <Link to='/aboutus'>About</Link>
       </Navbar.Link>
-      <Navbar.Link >
+      <Navbar.Link active={path==="/contact"} as={'div'} >
         <Link to='/contact'>Contact</Link>
       </Navbar.Link>
     </Navbar.Collapse>
@@ -73,3 +86,5 @@ function Header() {
 }
 
 export default Header
+
+
