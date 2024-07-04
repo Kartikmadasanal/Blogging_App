@@ -60,6 +60,8 @@ function Header() {
           </Dropdown.Header>
           <Link to={"/profilepage"}>
 
+          
+
           <Dropdown.Item >Profile</Dropdown.Item>
           </Link>
           <Dropdown.Item>Write</Dropdown.Item>
