@@ -3,7 +3,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Header from '../Components/Header';
 import FooterBar from '../Components/Footer';
-function Createpost() {
+function Editpost() {
   return (
     <div>
       <Header/>
@@ -61,5 +61,5 @@ function Createpost() {
   );
 }
 
-export default Createpost
+export default Editpost
 

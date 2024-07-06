@@ -1,7 +1,13 @@
 import React from 'react'
+import Header from '../Components/Header'
+import FooterBar from '../Components/Footer'
 
 function Aboutus() {
   return (
+    <div>
+
+    <Header/>
+   
     <div className='min-h-screen flex items-center justify-center'>
       <div className='max-w-2xl mx-auto p-3 text-center'>
         <div>
@@ -37,6 +43,8 @@ function Aboutus() {
           </div>
         </div>
       </div>
+    </div>
+    <FooterBar/>
     </div>
   )
 }
