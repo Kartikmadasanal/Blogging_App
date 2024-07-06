@@ -4,6 +4,7 @@ import Categorycards from '../Components/Categorycards';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import FooterBar from '../Components/Footer';
+import PostDatacopy from '../Components/PostDatacopy';
 function Home() {
 
 
@@ -14,22 +15,22 @@ function Home() {
       <div className='flex flex-col items-center justify-center flex-nowrap '>
         <Categorycards />
       </div>
-      <div className=' flex gap-8 flex-wrap items-center justify-center mt-5'>
+      <div className="px-4 py-5 md:px-[200px] min-h-[80vh]">
 
-        <Link to={'/'}>
-
-          <PostData />
-        </Link>
-        <PostData />
-        <PostData />
-        <PostData />
-        <PostData />
-        <PostData />
-        <PostData />
-        <PostData />
-        <PostData />
-
+        <PostDatacopy/>
+        <PostDatacopy/>
+        <PostDatacopy/>
+        <PostDatacopy/>
+        <PostDatacopy/>
+        <PostDatacopy/>
+        <PostDatacopy/>
+        <PostDatacopy/>
+        <PostDatacopy/>
+        <PostDatacopy/>
+        <PostDatacopy/>
+        <PostDatacopy/>
       </div>
+
       <FooterBar />
     </div>
   )

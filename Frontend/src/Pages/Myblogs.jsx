@@ -10,7 +10,7 @@ function Myblogs() {
             <Header />
 
 
-            <div className=' flex gap-8 flex-wrap items-center justify-center mt-1 min-h-screen' >
+            <div className="px-4 py-5 md:px-[200px] min-h-[80vh]">
 
                 <Link to={'/'}>
 

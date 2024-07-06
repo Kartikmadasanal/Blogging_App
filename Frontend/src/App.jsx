@@ -19,13 +19,13 @@ export default function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/aboutus" element={<Aboutus/> }/>
         <Route path="/contact" element={<Contact/> }/>
-        <Route path="/profilepage" element={<Profilepage/> }/>
-        <Route path="/createpost" element={<Createpost/> }/>
-        <Route path="/myblogs" element={<Myblogs/> }/>
-        <Route path="/editpost" element={<Editpost/> }/>
-        <Route path="/postpage" element={<Postpage/> }/>
-        <Route path="/Signin" element={<Signin/> }/>
         <Route path="/Login" element={<Login/> }/>
+        <Route path="/Signin" element={<Signin/> }/>
+        <Route path="/createpost" element={<Createpost/> }/>
+        <Route path="/profilepage/:id" element={<Profilepage/> }/>
+        <Route path="/postpage/:id" element={<Postpage/> }/>
+        <Route path="/editpost/:id" element={<Editpost/> }/>
+        <Route path="/myblogs/:id" element={<Myblogs/> }/>
       </Routes>
       
     </BrowserRouter>

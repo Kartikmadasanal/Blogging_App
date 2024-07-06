@@ -7,7 +7,7 @@ function FooterBar() {
 let year = d.getFullYear();
     return (
         <Footer container>
-            <div className="w-full text-center mt-16 ">
+            <div className="w-full text-center mt-1 ">
                 <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
                     <Link
                         to='/'
@@ -21,7 +21,6 @@ let year = d.getFullYear();
                     <Footer.LinkGroup>
                         <Footer.Link href="/aboutus">About</Footer.Link>
                         <Footer.Link href="/">Home</Footer.Link>
-                        <Footer.Link href="#">Licensing</Footer.Link>
                         <Footer.Link href="/contact">Contact</Footer.Link>
                     </Footer.LinkGroup>
                 </div>
