@@ -16,26 +16,7 @@ function Myblogs() {
 
                     <PostData />
                 </Link>
-                <Link to={'/'}>
-
-                    <PostData />
-                </Link>
-                <Link to={'/'}>
-
-                    <PostData />
-                </Link>
-                <Link to={'/'}>
-
-                    <PostData />
-                </Link>
-                <Link to={'/'}>
-
-                    <PostData />
-                </Link>
-                <Link to={'/'}>
-
-                    <PostData />
-                </Link>
+                
 
 
             </div>

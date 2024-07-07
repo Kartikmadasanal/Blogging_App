@@ -18,17 +18,7 @@ function Profilepage() {
 
             hidden
           />
-          <div
-            className='relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'>
-
-
-
-            <img
-              src={imgs}
-              alt='user'
-              className="rounded-full w-full h-full object-cover border-8 border-[lightgray] "
-            />
-          </div>
+          
 
           <TextInput
             type='text'

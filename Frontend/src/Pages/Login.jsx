@@ -1,19 +1,17 @@
 import { Button, Checkbox, Label, TextInput, Avatar, Dropdown, Navbar } from "flowbite-react";
 import FooterBar from "../Components/Footer";
 import { Link, useLocation } from 'react-router-dom';
-import logo from "../Components/FeatherPen.png"
-import { AiOutlineSearch } from "react-icons/ai"
+import { GiFeather } from "react-icons/gi";import { AiOutlineSearch } from "react-icons/ai"
 
 function Login() {
   return (
     <div>
-      <Navbar className='border-b-2 '>
+      <Navbar className='border-b-2 dark:bg-[#121212] '>
 
         <div
           className='self-center flex  whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
         >
-          <img className=' size-7' src={logo} />
-          <span className='py-1  rounded-lg text-red font-sans '>
+<GiFeather />          <span className='py-1  rounded-lg text-red font-sans '>
             CampusConnect
           </span>
         </div>

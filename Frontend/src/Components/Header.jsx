@@ -2,9 +2,8 @@ import React from 'react'
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai"
 import { FaMoon, FaSun } from "react-icons/fa"
-
+import { GiFeather } from "react-icons/gi";
 import { Link, useLocation } from 'react-router-dom';
-import logo from "./FeatherPen.png"
 import imgs from "../Components/imgg.jpg"
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from '../redux/theme/themeSclice';
@@ -17,13 +16,14 @@ function Header() {
 
 
   return (
-    <Navbar className='border-b-2 '>
+    <Navbar className='border-b-2 dark:bg-[#121212] '>
 
       <Link
         to='/'
         className='self-center flex  whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
       >
-        <img className=' size-7' src={logo} />
+        
+         <GiFeather />
         <span className='py-1  rounded-lg text-red font-sans '>
           CampusConnect
         </span>
@@ -52,7 +52,7 @@ function Header() {
             arrowIcon={false}
             inline
             label={
-              <Avatar alt="User settings" img={imgs} rounded />
+              <Avatar alt="User settings"  rounded />
             }
           >
             <Dropdown.Header>

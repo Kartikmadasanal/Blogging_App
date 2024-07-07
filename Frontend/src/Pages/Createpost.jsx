@@ -3,7 +3,23 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Header from '../Components/Header';
 import FooterBar from '../Components/Footer';
+
+
+
+  
 function Createpost() {
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    const maxSize = 2 * 1024 * 1024; // 2 MB limit
+    
+    if (file.size > maxSize) {
+        alert('File size exceeds 5 MB limit.');
+        event.target.value = null; // Clear the file input
+        return;
+    }
+  }
+    
   return (
     <div>
       <Header/>
@@ -33,8 +49,10 @@ function Createpost() {
           <FileInput
             type='file'
             accept='image/*'
+            onChange={handleFileChange} 
+            
           />
-          
+          <h1 className='font-semibold'>Maximum file size: 2MB</h1>
         </div>
        
           {/* <img
@@ -50,7 +68,7 @@ function Createpost() {
           required
           
         />
-        <Button type='submit' gradientDuoTone='purpleToPink'>
+        <Button type='submit' className=' bg-[#BB86FC]'>
           Publish
         </Button>
         
@@ -61,5 +79,5 @@ function Createpost() {
   );
 }
 
-export default Createpost
+export default Createpost;
 

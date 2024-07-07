@@ -4,7 +4,6 @@ import Categorycards from '../Components/Categorycards';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import FooterBar from '../Components/Footer';
-import PostDatacopy from '../Components/PostDatacopy';
 function Home() {
 
 
@@ -17,18 +16,13 @@ function Home() {
       </div>
       <div className="px-4 py-5 md:px-[200px] min-h-[80vh]">
 
-        <PostDatacopy/>
-        <PostDatacopy/>
-        <PostDatacopy/>
-        <PostDatacopy/>
-        <PostDatacopy/>
-        <PostDatacopy/>
-        <PostDatacopy/>
-        <PostDatacopy/>
-        <PostDatacopy/>
-        <PostDatacopy/>
-        <PostDatacopy/>
-        <PostDatacopy/>
+        <PostData/>
+        <PostData/>
+        <PostData/>
+        <PostData/>
+        <PostData/>
+        <PostData/>
+        <PostData/>
       </div>
 
       <FooterBar />
