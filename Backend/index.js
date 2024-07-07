@@ -1,16 +1,23 @@
-import express from "express";
-
+import express from "express"
+import mongoose from "mongoose"
+import cors from "cors"
+import authRoute from './routes/auth.js'
 const app = express()
+
+mongoose.connect("mongodb://localhost:27017/campusconnect").then(()=>{
+    console.log("Database connectd");
+}).catch((err)=>{
+console.log(err);
+})
+
 const port = 3000;
 
 
+app.use(express.json())
+app.use(cors())
 
- 
-app.get("/" , (req,res)=>{
-    res.send("hello")
-})
-
-
+app.use("/api/auth",authRoute)
+  
 
 
 

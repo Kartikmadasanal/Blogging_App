@@ -1,9 +1,48 @@
-import { Button, Checkbox, Label, TextInput, Avatar, Dropdown, Navbar } from "flowbite-react";
+import { Button, Label, TextInput, Navbar } from "flowbite-react";
 import FooterBar from "../Components/Footer";
-import { Link, useLocation } from 'react-router-dom';
-import { AiOutlineSearch } from "react-icons/ai"
+import { Link, useNavigate } from 'react-router-dom';
 import { GiFeather } from "react-icons/gi";
+import { useState } from "react";
+import axios from "axios"
 function Signin() {
+  const navigate=useNavigate()
+  const [error,setError]=useState(false)
+
+
+  const [Userdata, setUserdata] = useState({
+    username: "",
+    usn: "",
+    email: "",
+    password: ""
+  });
+
+  function handleChange(event) {
+    
+    const { name, value } = event.target;
+
+    setUserdata(prevValue => {
+      return {
+        ...prevValue,
+        [name]: value
+      };
+    });
+  }
+  const handleRegister= async(e)=>{
+    e.preventDefault();    
+    try{
+      const res=await axios.post("http://localhost:3000/api/auth/register",Userdata)
+      console.log(res)
+      navigate("/login")
+      
+    }
+    catch(error){
+      setError(true)
+      console.log(error)
+    }
+  }
+
+
+
   return (
     <div>
       <Navbar className='border-b-2 dark:bg-[#121212]'>
@@ -12,7 +51,7 @@ function Signin() {
           to='/'
           className='self-center flex  whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
         >
-<GiFeather />          <span className='py-1  rounded-lg text-red font-sans '>
+          <GiFeather />          <span className='py-1  rounded-lg text-red font-sans '>
             CampusConnect
           </span>
         </div>
@@ -26,10 +65,10 @@ function Signin() {
           </div>
         </div>
         <Navbar.Collapse>
-          <Navbar.Link  as={'div'}>
+          <Navbar.Link as={'div'}>
             <Link to='/login'>Login</Link>
           </Navbar.Link>
-          <Navbar.Link  as={'div'}>
+          <Navbar.Link as={'div'}>
             <Link to='/signin'>Register</Link>
           </Navbar.Link>
 
@@ -39,32 +78,34 @@ function Signin() {
 
       <div className=' min-h-screen mt-20 mx-auto  max-w-lg'>
 
-        <form className="flex  justify-center  p-3 w-full flex-col gap-4">
+        <form className="flex  justify-center  p-3 w-full flex-col gap-4" onSubmit={handleRegister}>
           <div>
             <div className="mb-2 block">
               <Label htmlFor="text" value="Your username" />
             </div>
-            <TextInput id="username" type="test" placeholder="Your username" required />
+            <TextInput id="username" name="username" type="text" placeholder="Your username" required  onChange={handleChange} />
           </div>
           <div>
             <div className="mb-2 block">
               <Label htmlFor="text" value="Your USN" />
             </div>
-            <TextInput id="usn" type="test" placeholder="Your USN" required />
+            <TextInput id="usn" name="usn" type="text" placeholder="Your USN" required  onChange={handleChange} />
           </div>
           <div>
             <div className="mb-2 block">
               <Label htmlFor="email1" value="Your email" />
             </div>
-            <TextInput id="email1" type="email" placeholder="Your email" required />
+            <TextInput id="email1" name="email" type="email" placeholder="Your email" required  onChange={handleChange} />
           </div>
           <div>
             <div className="mb-2 block">
               <Label htmlFor="password1" value="Your password" />
             </div>
-            <TextInput id="password1" type="password" placeholder="********" required />
+            <TextInput id="password1" name="password" type="password" placeholder="********" required onChange={handleChange} />
           </div>
           <Button type="submit">Register</Button>
+          {error && <h3 className="text-red-500 text-sm ">Something went wrong</h3>}
+
           <div className='flex gap-2 text-sm mt-5'>
             <span>Have an account?</span>
             <Link to='/login' className='text-blue-500'>
