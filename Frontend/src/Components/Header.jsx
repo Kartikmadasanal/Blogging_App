@@ -1,19 +1,41 @@
-import React from 'react'
+import { React, useContext, useState } from 'react'
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai"
 import { FaMoon, FaSun } from "react-icons/fa"
 import { GiFeather } from "react-icons/gi";
-import { Link, useLocation } from 'react-router-dom';
-import imgs from "../Components/imgg.jpg"
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from '../redux/theme/themeSclice';
-
+import axios from 'axios';
+import { UserContext } from "../contaxt/UserContext.jsx";
+import { URL } from "../url"
 
 function Header() {
   const path = useLocation().pathname;
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
+  const [prompt,setPrompt]=useState("")
 
+  const { user } = useContext(UserContext)
+  const { setUser } = useContext(UserContext)
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    try {
+      const res = await axios.get(URL + "/api/auth/logout", { withCredentials: true })
+      // console.log(res)
+      // console.log(user)
+      setUser({})
+      navigate("/login")
+
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+
+
+  
 
   return (
     <Navbar className='border-b-2 dark:bg-[#121212] '>
@@ -22,20 +44,35 @@ function Header() {
         to='/'
         className='self-center flex  whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
       >
-        
-         <GiFeather />
+
+        <GiFeather />
         <span className='py-1  rounded-lg text-red font-sans '>
           CampusConnect
         </span>
       </Link>
-      <form >
-        <TextInput
-          type='text'
-          placeholder='Search...'
-          rightIcon={AiOutlineSearch}
-          className='w-28 lg:w-full '
-        />
+      <form onSubmit={(e) =>{e.preventDefault(); navigate(prompt ? "?search=" + prompt : navigate("/"))}}>
+        {
+          path === "/" &&
+
+          <TextInput
+            type='text'
+            placeholder='Search...'
+            rightIcon={AiOutlineSearch}
+            className='w-28 lg:w-full '
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
+        }
       </form>
+
+
+
+
+
+   
+
+
+
 
       <div className='flex gap-2 md:order-2 '>
         <Button
@@ -52,26 +89,30 @@ function Header() {
             arrowIcon={false}
             inline
             label={
-              <Avatar alt="User settings"  rounded />
+              <Avatar alt="User settings" rounded />
             }
           >
             <Dropdown.Header>
-              <span className="block text-sm">Kartik madasanal</span>
-              <span className="block truncate text-sm font-medium">kartikmadasanal@gmail.com</span>
+              <span className="block text-sm">
+              {user.username}
+              </span>
+              <span className="block truncate text-sm font-medium">
+                {user.email}
+              </span>
             </Dropdown.Header>
-            <Link to={"/profilepage"}>
+            <Link to={"/profile/"+user._id}>
               <Dropdown.Item >Profile</Dropdown.Item>
             </Link>
             <Link to={"/createpost"}>
               <Dropdown.Item>Write</Dropdown.Item>
             </Link>
-            <Link to={"/myblogs"}>
+            <Link to={"/myblogs/"+user._id}>
 
-            <Dropdown.Item>My blogs</Dropdown.Item>
+              <Dropdown.Item>My blogs</Dropdown.Item>
             </Link>
             <Dropdown.Item className=' sm:hidden' onClick={() => dispatch(toggleTheme())}>Change theme to {theme === 'light' ? "dark" : "light"}</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
+            <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
           </Dropdown>
           <Navbar.Toggle />
         </div>

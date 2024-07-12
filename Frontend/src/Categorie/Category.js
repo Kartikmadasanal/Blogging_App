@@ -1,17 +1,12 @@
-const capitalizeFirstLetter = (str) => {
-    const capitalWord = str.charAt(0).toUpperCase() + str.slice(1);
-    return capitalWord;
-  };
 
   const categories = [
-    "all",
-    "tech",
-    "fashion",
-    "nature",
-    "travel",
-    "fitness",
-    "lifestyle",
+    "Tech",
+    "Finance",
+    "Business",
+    "Marketing",
+    "Fitness",
+    "Lifestyle",
     
 ]
 
-export {categories , capitalizeFirstLetter}
+export default categories 

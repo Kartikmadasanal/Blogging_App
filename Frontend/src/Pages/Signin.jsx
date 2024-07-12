@@ -4,9 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GiFeather } from "react-icons/gi";
 import { useState } from "react";
 import axios from "axios"
+import { URL } from "../url";
 function Signin() {
-  const navigate=useNavigate()
-  const [error,setError]=useState(false)
+  // const navigate=useNavigate()
+  const [error, setError] = useState(false)
+  const [msg, setmsg] = useState("")
 
 
   const [Userdata, setUserdata] = useState({
@@ -17,7 +19,7 @@ function Signin() {
   });
 
   function handleChange(event) {
-    
+
     const { name, value } = event.target;
 
     setUserdata(prevValue => {
@@ -27,15 +29,21 @@ function Signin() {
       };
     });
   }
-  const handleRegister= async(e)=>{
-    e.preventDefault();    
-    try{
-      const res=await axios.post("http://localhost:3000/api/auth/register",Userdata)
-      console.log(res)
-      navigate("/login")
-      
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(URL + "/api/auth/register", Userdata)
+      setUserdata(Userdata)
+
+      setmsg(res.data.Message)
+      // console.log(res.data.Message)
+      // console.log(res)
+      // navigate("/login")
+
+
+
     }
-    catch(error){
+    catch (error) {
       setError(true)
       console.log(error)
     }
@@ -57,22 +65,18 @@ function Signin() {
         </div>
 
 
-        <div className='flex gap-2 md:order-2 '>
+        <div className='flex gap-2 md:order-2 flex-end'>
 
-          <div className="flex md:order-2 float-end">
 
-            <Navbar.Toggle />
-          </div>
+          <Navbar.Collapse>
+            <Navbar.Link as={'div'}>
+              <Link to='/login'>Login</Link>
+            </Navbar.Link>
+
+
+          </Navbar.Collapse>
         </div>
-        <Navbar.Collapse>
-          <Navbar.Link as={'div'}>
-            <Link to='/login'>Login</Link>
-          </Navbar.Link>
-          <Navbar.Link as={'div'}>
-            <Link to='/signin'>Register</Link>
-          </Navbar.Link>
 
-        </Navbar.Collapse>
       </Navbar>
 
 
@@ -83,19 +87,19 @@ function Signin() {
             <div className="mb-2 block">
               <Label htmlFor="text" value="Your username" />
             </div>
-            <TextInput id="username" name="username" type="text" placeholder="Your username" required  onChange={handleChange} />
+            <TextInput id="username" name="username" type="text" placeholder="Your username" required onChange={handleChange} />
           </div>
           <div>
             <div className="mb-2 block">
               <Label htmlFor="text" value="Your USN" />
             </div>
-            <TextInput id="usn" name="usn" type="text" placeholder="Your USN" required  onChange={handleChange} />
+            <TextInput id="usn" name="usn" type="text" placeholder="Your USN" required onChange={handleChange} />
           </div>
           <div>
             <div className="mb-2 block">
               <Label htmlFor="email1" value="Your email" />
             </div>
-            <TextInput id="email1" name="email" type="email" placeholder="Your email" required  onChange={handleChange} />
+            <TextInput id="email1" name="email" type="email" placeholder="Your email" required onChange={handleChange} />
           </div>
           <div>
             <div className="mb-2 block">
@@ -105,6 +109,7 @@ function Signin() {
           </div>
           <Button type="submit">Register</Button>
           {error && <h3 className="text-red-500 text-sm ">Something went wrong</h3>}
+          {msg && <h3 className="text-green-500 text-sm ">{msg}</h3>}
 
           <div className='flex gap-2 text-sm mt-5'>
             <span>Have an account?</span>

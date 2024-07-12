@@ -1,15 +1,17 @@
 
 import { Button, Drawer, Label, Textarea, TextInput } from "flowbite-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { HiEnvelope } from "react-icons/hi2";
 import FooterBar from "../Components/Footer";
 import Header from "../Components/Header";
+import { UserContext, UserContextProvider } from "../contaxt/UserContext";
 
 function Contact() {
 
-  const handleClose = () => setIsOpen(false);
+  const { user } = useContext(UserContext);
 
   return (
+    <UserContextProvider>  
     <div>
       <Header />
 
@@ -53,6 +55,8 @@ function Contact() {
       </div>
       <FooterBar />
     </div>
+    </UserContextProvider>
+  
   );
 }
 

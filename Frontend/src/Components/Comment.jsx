@@ -1,76 +1,51 @@
+import axios from 'axios';
 import { Button, Textarea } from 'flowbite-react';
-import imgs from "../Components/imgg.jpg"
+import { useContext } from 'react';
+import { UserContext } from '../contaxt/UserContext';
+import { URL } from '../url';
 
-function Comment() {
+
+function Comment({ c, post }) {
+    // console.log(c._id)
+
+
+    const { user } = useContext(UserContext)
+    const deleteComment = async (id) => {
+        try {
+            await axios.delete(URL + "/api/comments/" + id, { withCredentials: true })
+            window.location.reload(true)
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+
 
     return (
-        <div className='flex p-4 border-b dark:border-gray-600 text-sm'>
-            <div className='flex-shrink-0 mr-3'>
-                <img
-                    className='w-10 h-10 rounded-full bg-gray-200'
-                    src={imgs}
-                    alt="poprpic"
-                />
+
+        <div>
+            <div className='flex items-center mb-1'>
+                <span className='font-bold mr-1 text-xs truncate'>
+                    @{c.author}
+                </span>
+                <div className="flex space-x-2 text-sm">
+                    <p>{new Date(c.updatedAt).toString().slice(0, 15)}</p>
+                    <p>{new Date(c.updatedAt).toString().slice(16, 24)}</p>
+                </div>
             </div>
-            <div className='flex-1'>
-                <div className='flex items-center mb-1'>
-                    <span className='font-bold mr-1 text-xs truncate'>
-                        @kartikmadasanal
-                    </span>
-                   
-                </div>
-
-                <>
-                    <Textarea
-                        className='mb-2'
-                        value='hello'
-                    />
-                    <div className='flex justify-end gap-2 text-xs'>
-                        <Button
-                            type='button'
-                            size='sm'
-                            gradientDuoTone='purpleToBlue'
-
-                        >
-                            Save
-                        </Button>
-                    </div>
-                </>
-                <>
-                <div className='flex items-center mb-1'>
-                    <span className='font-bold mr-1 text-xs truncate'>
-                        @kartikmadasanal
-                    </span>
-                    <div className="flex space-x-2 text-sm">
-                        <p>Fri Jun 28 2024</p>
-                        <p>16:34:58</p>
-                    </div>
-                </div>
-                    <p className='text-gray-500 pb-2'>this is my comment</p>
-                    <div className='flex items-center pt-2 text-xs border-t dark:border-gray-700 max-w-fit gap-2'>
+            <p className='text-gray-500 pb-2'>{c.comment}</p>
+            <div className='flex items-center pt-2 text-xs border-t dark:border-gray-700 max-w-fit gap-2'>
 
 
-                        <>
-                            <button
-                                type='button'
-                                className='text-gray-400 hover:text-blue-500'
-                            >
-                                Edit
-                            </button>
-                            <button
-                                type='button'
 
-                                className='text-gray-400 hover:text-red-500'
-                            >
-                                Delete
-                            </button>
-                        </>
-
-                    </div>
-                </>
+                {user?._id === c?.userId ?
+                    <div className="flex items-center justify-center space-x-2">
+                        <p className="cursor-pointer" onClick={() => deleteComment(c._id)}>Delete</p>
+                    </div> : ""}
 
             </div>
         </div>
+
     );
 }
 
