@@ -4,7 +4,7 @@ import Comment from '../Components/Comment';
 import { Button, Textarea } from 'flowbite-react';
 import Header from '../Components/Header';
 import FooterBar from '../Components/Footer';
-import { UserContext } from '../contaxt/UserContext';
+// import { UserContext } from '../contaxt/UserContext';
 import { BiEdit } from 'react-icons/bi'
 import { MdDelete } from 'react-icons/md'
 import axios from 'axios';
@@ -18,9 +18,12 @@ import {
 } from 'firebase/storage';
 function Postpage() {
 
+    const user = JSON.parse(localStorage.getItem("user"));
+
+
     const postId = useParams().id
     const [post, setPost] = useState({})
-    const { user } = useContext(UserContext)
+    // const { user } = useContext(UserContext)
     const [comments, setComments] = useState([])
     const [comment, setComment] = useState("")
     const [loader, setLoader] = useState(false)
@@ -49,7 +52,7 @@ function Postpage() {
             await deleteObject(storageRef)
 
             const res = await axios.delete(URL + "/api/posts/" + postId, { withCredentials: true })
-            console.log(res.data)
+            // console.log(res.data)
 
             navigate("/")
 

@@ -5,10 +5,12 @@ import { GiFeather } from "react-icons/gi";
 import { useState } from "react";
 import axios from "axios"
 import { URL } from "../url";
+import Loader from "../Components/Lodear";
 function Signin() {
   // const navigate=useNavigate()
   const [error, setError] = useState(false)
   const [msg, setmsg] = useState("")
+  const[loader,setLoader] = useState(false)
 
 
   const [Userdata, setUserdata] = useState({
@@ -30,12 +32,14 @@ function Signin() {
     });
   }
   const handleRegister = async (e) => {
+    setLoader(true)
     e.preventDefault();
     try {
       const res = await axios.post(URL + "/api/auth/register", Userdata)
       setUserdata(Userdata)
 
       setmsg(res.data.Message)
+      setLoader(false)
       // console.log(res.data.Message)
       // console.log(res)
       // navigate("/login")
@@ -44,6 +48,7 @@ function Signin() {
 
     }
     catch (error) {
+      setLoader(false)
       setError(true)
       console.log(error)
     }
@@ -107,7 +112,11 @@ function Signin() {
             </div>
             <TextInput id="password1" name="password" type="password" placeholder="********" required onChange={handleChange} />
           </div>
-          <Button type="submit">Register</Button>
+          <Button type="submit">
+          {loader?<Loader/>:"Register"}
+          
+          
+          </Button>
           {error && <h3 className="text-red-500 text-sm ">Something went wrong</h3>}
           {msg && <h3 className="text-green-500 text-sm ">{msg}</h3>}
 

@@ -4,16 +4,17 @@ import { Alert, Button, Modal, ModalBody, TextInput } from 'flowbite-react';
 import Header from '../Components/Header';
 import FooterBar from '../Components/Footer';
 import { useNavigate, useParams } from 'react-router-dom';
-import { UserContext } from '../contaxt/UserContext';
+// import { UserContext } from '../contaxt/UserContext';
 import axios from 'axios';
 import { URL } from '../url';
 import Loader from '../Components/Lodear';
 function Profilepage() {
 
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const param = useParams().id
-  const { user } = useContext(UserContext)
-  const { setUser } = useContext(UserContext)
+  // const { user } = useContext(UserContext)
+  // const { setUser } = useContext(UserContext)
   const [updatesdata,setUpdateddata] = useState({})
   const navigate = useNavigate()
   const [userdata, setusedata] = useState({})
@@ -50,9 +51,13 @@ function Profilepage() {
   }
 
   const handleUserDelete = async () => {
+    alert("Are you sure ?")
     try {
-      await axios.delete(URL + "/api/users/" + user._id, { withCredentials: true })
-      setUser({})
+      await axios.delete(URL + "/api/users/" + user._id,{ withCredentials: true })
+      localStorage.removeItem("user");
+      // window.location.reload();
+      await clearCookie("token",{sameSite:"none",secure:true})
+
       navigate("/login")
       // console.log(res.data)
 
@@ -64,13 +69,13 @@ function Profilepage() {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get(URL + "/api/auth/logout", { withCredentials: true })
-      // console.log(res)
-      // console.log(user)
-      setUser({})
-      navigate("/login")
-
-    }
+      const res = await axios.get(URL + "/api/auth/logout", { withCredentials: true });
+      // console.log(res);
+      // console.log(user);
+      localStorage.removeItem("user");
+      navigate("/login");
+    } 
+  
     catch (err) {
       console.log(err)
     }
@@ -81,7 +86,7 @@ function Profilepage() {
     fetchProfile()
 
   }, [param])
-console.log(user)
+// console.log(user)
 
   if (!user) {
 

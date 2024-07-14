@@ -3,7 +3,7 @@ import Header from '../Components/Header'
 import FooterBar from '../Components/Footer'
 import PostData from '../Components/PostData'
 import { Link, useLocation } from 'react-router-dom'
-import { UserContext } from '../contaxt/UserContext'
+// import { UserContext } from '../contaxt/UserContext'
 import axios from 'axios'
 import { URL } from '../url'
 import Loader from '../Components/Lodear'
@@ -20,8 +20,9 @@ function Myblogs() {
   const [posts,setPosts]=useState([])
   const [noResults,setNoResults]=useState(false)
   const [loader,setLoader]=useState(false)
-  const {user}=useContext(UserContext)
+  // const {user}=useContext(UserContext)
   // console.log(user)
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const fetchPosts=async()=>{
     setLoader(true)

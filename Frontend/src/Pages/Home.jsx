@@ -4,17 +4,21 @@ import Categorycards from '../Components/Categorycards';
 import { Link, useLocation } from 'react-router-dom';
 import Header from '../Components/Header';
 import FooterBar from '../Components/Footer';
-import { UserContext } from "../contaxt/UserContext";
+// import { UserContext } from "../contaxt/UserContext";
 import Login from "./Login";
 import Loader from '../Components/Lodear'
-import { UserContextProvider } from "../contaxt/UserContext"
+// import { UserContextProvider } from "../contaxt/UserContext"
 
 import axios from "axios";
 import { URL } from "../url";
 
 function Home() {
 
-  const { user } = useContext(UserContext); 
+  // const { user } = useContext(UserContext); 
+  // const user =localStorage.getItem("user");
+	// console.log(user);
+
+
 
   const { search } = useLocation()
   // console.log(search)
@@ -47,16 +51,24 @@ function Home() {
     fetchPosts()
   }, [search])
 
+  // useEffect(() => {
+  //   getUser()
 
-  if (!user) {
+  // }, [])
+  const getUser = async () => {
+    try {
+      const res = await axios.get(URL + "/api/auth/refetch", { withCredentials: true })
+      // console.log(res.data)
+      localStorage.setItem("user", JSON.stringify(res.data));
+      window.location = "/";
 
-
-    return <Login />
-
+    }
+    catch (err) {
+      console.log(err)
+    }
   }
-  else {
+//  console.log(user)
     return (
-      <UserContextProvider>
 
       <div>
         <Header />
@@ -79,11 +91,10 @@ function Home() {
 
         <FooterBar />
       </div>
-      </UserContextProvider>
 
     )
   }
 
-}
+
 
 export default Home

@@ -7,7 +7,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from '../redux/theme/themeSclice';
 import axios from 'axios';
-import { UserContext } from "../contaxt/UserContext.jsx";
+// import { UserContext } from "../contaxt/UserContext.jsx";
 import { URL } from "../url"
 
 function Header() {
@@ -16,8 +16,10 @@ function Header() {
   const dispatch = useDispatch();
   const [prompt,setPrompt]=useState("")
 
-  const { user } = useContext(UserContext)
-  const { setUser } = useContext(UserContext)
+  // const { user } = useContext(UserContext)
+  // const { setUser } = useContext(UserContext)
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const navigate = useNavigate()
 
   const handleLogout = async () => {
@@ -25,7 +27,8 @@ function Header() {
       const res = await axios.get(URL + "/api/auth/logout", { withCredentials: true })
       // console.log(res)
       // console.log(user)
-      setUser({})
+      localStorage.removeItem("user");
+      // window.location.reload();
       navigate("/login")
 
     }

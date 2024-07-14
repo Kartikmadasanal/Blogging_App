@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Button, Textarea } from 'flowbite-react';
-import { useContext } from 'react';
-import { UserContext } from '../contaxt/UserContext';
+// import { useContext } from 'react';
+// import { UserContext } from '../contaxt/UserContext';
 import { URL } from '../url';
 
 
@@ -9,7 +9,9 @@ function Comment({ c, post }) {
     // console.log(c._id)
 
 
-    const { user } = useContext(UserContext)
+    // const { user } = useContext(UserContext)
+    const user = JSON.parse(localStorage.getItem("user"));
+
     const deleteComment = async (id) => {
         try {
             await axios.delete(URL + "/api/comments/" + id, { withCredentials: true })

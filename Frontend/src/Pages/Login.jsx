@@ -2,17 +2,15 @@ import { Button, Checkbox, Label, TextInput, Avatar, Dropdown, Navbar } from "fl
 import FooterBar from "../Components/Footer";
 import { Link, useNavigate } from 'react-router-dom';
 import { GiFeather } from "react-icons/gi"; import { AiOutlineSearch } from "react-icons/ai"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import axios from "axios";
 import { URL } from "../url";
-import { UserContext } from "../contaxt/UserContext";
 
 function Login() {
 
   const navigate = useNavigate()
   const [error, setError] = useState(false)
   const [errormessage, setErrormessage] = useState("")
-  const { setUser } = useContext(UserContext)
 
 
   const [Userdata, setUserdata] = useState({
@@ -33,12 +31,14 @@ function Login() {
   }
 
   const handleLogin = async (e) => {
+    
     e.preventDefault();
     try {
       const res = await axios.post(URL + "/api/auth/login", Userdata, { withCredentials: true })
 
-      setUser(res.data)
-      navigate("/")
+      localStorage.setItem("user", JSON.stringify(res.data));
+      window.location = "/";
+      // navigate("/")
 
     }
     catch (err) {
@@ -50,6 +50,16 @@ function Login() {
     }
 
   }
+  
+	
+
+
+
+
+  
+
+
+
   return (
     <div>
       <Navbar className='border-b-2 dark:bg-[#121212] '>
@@ -94,6 +104,9 @@ function Login() {
             <TextInput id="password1" type="password" name="password" placeholder="********" required onChange={handleChange} />
           </div>
           <Button type="submit">Login</Button>
+          <Link to="/forgot-password">
+							<p >Forgot Password ?</p>
+						</Link>
           {error && <h3 className="text-red-500 text-sm ">{errormessage}</h3>}
 
           <div className='flex gap-2 text-sm mt-5'>

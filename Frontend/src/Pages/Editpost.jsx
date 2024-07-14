@@ -56,7 +56,7 @@ function Editpost() {
   useEffect(()=>{
     fetchPost()
   },[postId])
-console.log(formData)
+// console.log(formData)
 
 
 
@@ -110,7 +110,7 @@ console.log(formData)
           
         />
         <Button type='submit' gradientDuoTone='purpleToPink'>
-          Publish
+          Edit Post
         </Button>
         
       </form>

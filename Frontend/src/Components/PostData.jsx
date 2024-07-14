@@ -9,7 +9,7 @@ const PostData = ({ post }) => {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent || '';
   };
-console.log(post)
+// console.log(post)
   return (
     <div className="w-full flex flex-col md:flex-row mt-8 space-y-4 md:space-y-0 md:space-x-4 shadow-lg rounded-lg border dark:border-[#1F1A24] dark:bg-[#121212]">
       {/* left (image) */}

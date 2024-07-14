@@ -7,7 +7,7 @@ import categories from '../Categorie/Category';
 import {useContext, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom'
 
-import { UserContext, UserContextProvider } from '../contaxt/UserContext';
+// import { UserContext, UserContextProvider } from '../contaxt/UserContext';
 import Loader from '../Components/Lodear';
 import app from '../Firebase';
 
@@ -24,7 +24,8 @@ import { useEffect } from 'react';
 
 function Createpost() {
 
-  const {user}=useContext(UserContext)
+  // const {user}=useContext(UserContext)
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
@@ -82,16 +83,15 @@ useEffect(()=>{
   }
   catch(err){
     console.log(err)
-    console.log(formData)
+    // console.log(formData)
     setPublishError(err.message)
     console.log(publishError)
 
   }
 
   };
-  console.log(formData)
+  // console.log(formData)
   return (
-    <UserContextProvider>
 
     <div>
       <Header />
@@ -175,7 +175,6 @@ useEffect(()=>{
       </div>
       <FooterBar />
     </div>
-    </UserContextProvider>
 
   );
 }

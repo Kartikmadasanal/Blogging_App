@@ -2,6 +2,9 @@ import { Footer } from "flowbite-react";
 import { Link } from 'react-router-dom';
 import { GiFeather } from "react-icons/gi";
 function FooterBar() {
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
     const d = new Date();
     let year = d.getFullYear();
     return (
@@ -16,11 +19,12 @@ function FooterBar() {
                             CampusConnect
                         </span>
                     </Link>
-                    <Footer.LinkGroup>
+                    {user && <Footer.LinkGroup>
                         <Footer.Link href="/aboutus">About</Footer.Link>
                         <Footer.Link href="/">Home</Footer.Link>
                         <Footer.Link href="/contact">Contact</Footer.Link>
-                    </Footer.LinkGroup>
+                    </Footer.LinkGroup>}
+
                 </div>
                 <Footer.Divider />
                 <Footer.Copyright href="#" by="Campusconnect" year={year} />

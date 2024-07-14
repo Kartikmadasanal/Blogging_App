@@ -14,7 +14,6 @@ import { URL } from "../url";
 				
 				const data  = await axios.get(URL+`/api/auth/${param.id}/verify/${param.token}`);
 				setValidUrl(true);
-				console.log(data);
 			} catch (error) {
 				console.log(error);
 				setValidUrl(false);

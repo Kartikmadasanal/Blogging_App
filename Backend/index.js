@@ -7,6 +7,8 @@ import authRoute from './routes/auth.js'
 import userRoute from './routes/users.js'
 import postRoute from './routes/posts.js'
 import commentRoute from './routes/comments.js'
+import passwordResetRoutes from './routes/passwordReset.js'
+import sendmessageRoutes from './routes/sendfeed.js'
 const app = express()
 dotenv.config()
 
@@ -26,7 +28,8 @@ app.use("/api/auth",authRoute)
 app.use("/api/users",userRoute)
 app.use("/api/posts",postRoute)
 app.use("/api/comments",commentRoute)
-
+app.use("/api/password-reset", passwordResetRoutes);
+app.use("/api/sendmessage", sendmessageRoutes);
 
 
 
